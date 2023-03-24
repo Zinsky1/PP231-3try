@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<h3>Users</h3>
+
+ <div th:each="user : ${users}">
+    <a th:href="@{/users/{id}(id=${user.getId()})}"
+    th:text="${user.getFirstName() + ' ' + user.getLastName()}">user</a>
+
+</div>
+
+<br>
+<a href="/crud4_war_exploded/users/new">add an user</a>
+<br>
+
+<h3>Tabled users</h3>
+<table>
+        <tr>
+            <th>---------Firstname---------</th>
+            <th>---------Lastname---------</th>
+            <th>---------Email---------</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+            <th th:text="${user.id}"></th>
+            <td>
+                <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
+                    <input type="submit" value="Delete"/>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/users/{id}/edit(id=${user.getId()})}">
+                    <input type="submit" value="Update"/>
+                </form>
+            </td>
+
+        </tr>
+
+    </table>
+
+
+</body>
+</html>
+
+
